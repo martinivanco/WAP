@@ -1,0 +1,29 @@
+body {
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+}
+
+thead, tfoot {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+thead td, tfoot td {
+    padding: 0.4em;
+}
+
+td {
+    border: 1px solid black;
+    margin: 0;
+}
