@@ -27,3 +27,12 @@ td {
     border: 1px solid black;
     margin: 0;
 }
+
+.sort_button_0, .sort_button_1, .sort_button_2 {
+    width: 2em;
+    height: 1em;
+}
+
+.epic {
+    display: none;
+}
