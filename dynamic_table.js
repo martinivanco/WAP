@@ -105,6 +105,27 @@ function DynamicTable(tableId) {
         this.redraw();
     }
 
+    this.getIconClass = function (i) {
+        if (i == 0)
+            return "fas fa-sort";
+        if (i == 1)
+            return "fas fa-sort-alpha-down";
+        if (i == 2)
+            return "fas fa-sort-alpha-up";
+        if (i == 3)
+            return "fas fa-sort-numeric-down";
+        if (i == 6)
+            return "fas fa-sort-numeric-up";
+        return "fas";
+    }
+
+    var iconLink = document.createElement("link");
+    iconLink.setAttribute("rel", "stylesheet");
+    iconLink.setAttribute("href", "https://use.fontawesome.com/releases/v5.7.0/css/all.css");
+    iconLink.setAttribute("integrity", "sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ");
+    iconLink.setAttribute("crossorigin", "anonymous");
+    document.head.appendChild(iconLink);
+
     for (var i = 1; i < arguments.length; i++) {
         if ((arguments[i] != STRCOL) && (arguments[i] != NUMCOL)) {
             console.error("Dynamic table: Invalid arguments.");
@@ -145,6 +166,8 @@ function DynamicTable(tableId) {
     for (var i = 0; i < this.numCols; i++) {
         var filterInput = document.createElement("input");
         filterInput.setAttribute("type", "text");
+        filterInput.setAttribute("class", "dyntable_filter");
+        filterInput.setAttribute("placeholder", "Filter...");
         filterInput.oninput = this.setFilter.bind(this, i);
         var cellElement = document.createElement("td");
         cellElement.appendChild(filterInput);
@@ -156,11 +179,19 @@ function DynamicTable(tableId) {
         var cellElement = document.createElement("td");
         for (var j = 0; j < 3; j++) {
             var sortButton = document.createElement("button");
-            sortButton.setAttribute("class", "sort_button_" + j);
-            if (arguments.length > i + 1)
+            var icon = document.createElement("i");
+            sortButton.setAttribute("class", "dyntable_sort");
+
+            if (arguments.length > i + 1) {
                 sortButton.onclick = this.setOrder.bind(this, i, j * arguments[i + 1]);
-            else
+                icon.setAttribute("class", this.getIconClass(j * arguments[i + 1]));
+            }
+            else {
                 sortButton.onclick = this.setOrder.bind(this, i, j);
+                icon.setAttribute("class", this.getIconClass(j));
+            }
+
+            sortButton.appendChild(icon);
             cellElement.appendChild(sortButton);
         }
         this.sortBar.appendChild(cellElement);

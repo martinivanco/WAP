@@ -10,10 +10,11 @@ h1 {
 table {
     margin: auto;
     border-collapse: collapse;
+    border-spacing: 0;
 }
 
 thead, tfoot {
-    background-color: red;
+    background-color: #46d;
     color: white;
     font-weight: bold;
     text-align: center;
@@ -24,11 +25,25 @@ thead td, tfoot td {
 }
 
 td {
-    border: 1px solid black;
+    border: 1px solid #ddd;
     margin: 0;
+    padding: 4px;
 }
 
-.sort_button_0, .sort_button_1, .sort_button_2 {
-    width: 2em;
-    height: 1em;
+tbody tr:nth-child(2n) {
+    background-color: #f2f2f2;
+}
+
+.dyntable_sort {
+    font-size: 1.2em;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin: 0 0.2em;
+    background-color: white;
+}
+
+.dyntable_filter {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 2px;
 }
