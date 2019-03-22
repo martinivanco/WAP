@@ -2,11 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dynamická tabuka - Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css">
-    <script defer src="dynamic_table.js"></script>
+    <script src="dynamic_table.js"></script>
+    <script>
+        var myTable = new DynamicTable("rubiks_cube", NUMCOL, STRCOL, STRCOL, STRCOL);
+    </script>
 </head>
 <body>
     <h1>Dynamická tabulka - Demo</h1>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Návod pre Dynamickú tabulku</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <h1>Návod pre Dynamickú tabulku</h1>
+    <p>
+        Dynamická tabulka je skript jednoducho využiteľný pre tabuľky v stránke.<br>
+        Pridá nad prvý riadok tabuľky nástroj na filtrovanie a radenie riadkov.<br>
+        Stačí naimportovať skript pomocou tagu v hlavičke HTML dokumentu:<br>
+        <code>&lt;script src="dynamic_table.js"&gt;&lt;/script&gt;</code><br>
+        Potom už len zavolať konštruktor DynamicTable vo Vašom hlavnom js skripte:<br>
+        <code>new DynamicTable("&lt;id tabuľky&gt;", &lt;... voliteľné parametre pre správanie radenia (reťazec alebo číslo)&gt;);</code><br>
+        Napríklad:<br>
+        <code>var myTable = new DynamicTable("rubiks_cube", NUMCOL, STRCOL, STRCOL, STRCOL);</code><br>
+        Skript je samozrejme nutné naimportovať pred volaním jeho funkcií. Štýl filtrovacieho nástroja je možné<br>
+        upraviť pomocou tried <code>.dyntable_cell .dyntable_filter</code> a <code>.dyntable_sort</code>.<br>
+        Kompletné demo nájdete v súbore demo.html.
+    </p>
+</body>
+</html>

@@ -1,3 +1,28 @@
+/* DYNAMIC TABLE STYLING */
+
+/* cell */
+.dyntable_cell {
+    color: inherit;
+}
+
+/* sort button */
+.dyntable_sort {
+    font-size: 1.2em;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin: 0 0.2em;
+    background-color: white;
+}
+
+/* filter input */
+.dyntable_filter {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+/* DEMO STYLE */
+
 body {
     font-family: sans-serif;
 }
@@ -32,18 +57,4 @@ td {
 
 tbody tr:nth-child(2n) {
     background-color: #f2f2f2;
-}
-
-.dyntable_sort {
-    font-size: 1.2em;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    margin: 0 0.2em;
-    background-color: white;
-}
-
-.dyntable_filter {
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    padding: 2px;
 }
