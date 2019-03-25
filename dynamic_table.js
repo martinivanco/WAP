@@ -45,7 +45,7 @@ class DynamicTable {
         // check if any sorting is set
         var originalOrder = true;
         for (var i = 0; i < this.orders.length; i++) {
-            if (this.orders[i] != 0) {
+            if (this.orders[i][0] != 0) {
                 originalOrder = false;
                 break;
             }
@@ -61,43 +61,53 @@ class DynamicTable {
             return sortedRows;
         }
 
-        for (var i = 0; i < this.orders.length; i++) {
+        // sort orders in order they were applied
+        var sorts = this.orders.slice();
+        sorts.sort((t1, t2) => {
+            if (t1[2] < t2[2])
+                return -1;
+            if (t1[2] > t2[2])
+                return 1;
+            return 0;
+        });
+
+        for (var i = 0; i < sorts.length; i++) {
 
             // SORTING USING CUSTOM COMPARISON FUNCTION
             filteredRows.sort((r1, r2) => {
 
                 // string ascending order
-                if (this.orders[i] == 1 * STRCOL) {
-                    if (r1.cells[i] < r2.cells[i])
+                if (sorts[i][1] == 1 * STRCOL) {
+                    if (r1.cells[sorts[i][0]] < r2.cells[sorts[i][0]])
                         return -1;
-                    if (r1.cells[i] > r2.cells[i])
+                    if (r1.cells[sorts[i][0]] > r2.cells[sorts[i][0]])
                         return 1;
                     return 0;
                 }
 
                 // string descending order
-                if (this.orders[i] == 2 * STRCOL) {
-                    if (r1.cells[i] < r2.cells[i])
+                if (sorts[i][1] == 2 * STRCOL) {
+                    if (r1.cells[sorts[i][0]] < r2.cells[sorts[i][0]])
                         return 1;
-                    if (r1.cells[i] > r2.cells[i])
+                    if (r1.cells[sorts[i][0]] > r2.cells[sorts[i][0]])
                         return -1;
                     return 0;
                 }
 
                 // number ascending order
-                if (this.orders[i] == 1 * NUMCOL) {
-                    if (Number(r1.cells[i]) < Number(r2.cells[i]))
+                if (sorts[i][1] == 1 * NUMCOL) {
+                    if (Number(r1.cells[sorts[i][0]]) < Number(r2.cells[sorts[i][0]]))
                         return -1;
-                    if (Number(r1.cells[i]) > Number(r2.cells[i]))
+                    if (Number(r1.cells[sorts[i][0]]) > Number(r2.cells[sorts[i][0]]))
                         return 1;
                     return 0;
                 }
 
                 // number descending order
-                if (this.orders[i] == 2 * NUMCOL) {
-                    if (Number(r1.cells[i]) < Number(r2.cells[i]))
+                if (sorts[i][1] == 2 * NUMCOL) {
+                    if (Number(r1.cells[sorts[i][0]]) < Number(r2.cells[sorts[i][0]]))
                         return 1;
-                    if (Number(r1.cells[i]) > Number(r2.cells[i]))
+                    if (Number(r1.cells[sorts[i][0]]) > Number(r2.cells[sorts[i][0]]))
                         return -1;
                     return 0;
                 }
@@ -136,7 +146,7 @@ class DynamicTable {
 
     // called when order is changed
     setOrder(column, order) {
-        this.orders[column] = order;
+        this.orders[column] = [column, order, new Date()];
         this.redraw();
     }
 
@@ -205,7 +215,7 @@ class DynamicTable {
         }
         this.orders = [];
         for (var i = 0; i < this.numCols; i++) {
-            this.orders[i] = 0;
+            this.orders[i] = [i, 0, new Date()];
         }
 
         // SET UP THE FILTER BAR
@@ -275,7 +285,7 @@ class DynamicTable {
     constructor(tableId) {
         // wait until the DOM is loaded, then proceed
         document.addEventListener('DOMContentLoaded', (event) => {
-            this.setup(tableId);
+            this.setup.apply(this, arguments);
         });
     }
 }
